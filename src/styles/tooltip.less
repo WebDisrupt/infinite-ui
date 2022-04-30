@@ -1,0 +1,243 @@
+// main: style.less
+/* Tooltip text */
+
+:root {
+    --tooltip-border-radius: 6px;
+    --tooltip-background: #f1f1f1;
+    --tooltip-edge: #ccc;
+    --tooltip-text-color: #000;
+    --tooltip-font-size: 16px;
+    --tooltip-move: 8px;
+}
+
+button[aria-label][tooltip-direction] {
+    overflow: visible;
+}
+
+[aria-label][tooltip-direction] {
+    position: relative;
+    cursor: pointer;
+    &:after {
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.18s ease-out 0.18s;
+        text-indent: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        font-weight: normal;
+        font-style: normal;
+        text-shadow: none;
+        font-size: var(--tooltip-font-size);
+        background: var(--tooltip-background);
+        color: var(--tooltip-text-color);
+        border-radius: var(--tooltip-border-radius);
+        content: attr(aria-label);
+        padding: .5em 1em;
+        border: 2px solid var(--tooltip-edge);
+        position: absolute;
+        white-space: nowrap;
+        z-index: 10;
+    }
+
+    &:before {
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-top-color: var(--tooltip-edge);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.18s ease-out 0.18s;
+        content: "";
+        position: absolute;
+        z-index: 10;
+    }
+
+    &:hover:before,
+    &:hover:after,
+    &[tooltip-visible]:before,
+    &[tooltip-visible]:after {
+        opacity: 1;
+        pointer-events: none;
+    }
+
+    &.font-awesome:after {
+        font-family: FontAwesome, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    &[tooltip-break]:after {
+        white-space: pre;
+    }
+
+    &[tooltip-break][tooltip-length]:after {
+        white-space: pre-line;
+        word-break: break-word;
+    }
+
+    &[tooltip-blunt]:before,
+    &[tooltip-blunt]:after {
+        transition: none;
+    }
+
+    &[tooltip-direction="up"]:hover:after,
+    &[tooltip-direction="up"][tooltip-visible]:after,
+    &[tooltip-direction="down"]:hover:after,
+    &[tooltip-direction="down"][tooltip-visible]:after {
+        transform: translate(-50%, 0);
+    }
+
+    &[tooltip-direction="up"]:hover:before,
+    &[tooltip-direction="up"][tooltip-visible]:before,
+    &[tooltip-direction="down"]:hover:before,
+    &[tooltip-direction="down"][tooltip-visible]:before {
+        transform: translate(-50%, 0);
+    }
+
+    &[tooltip-direction*="-left"]:after {
+        left: 0;
+    }
+
+    &[tooltip-direction*="-left"]:before {
+        left: 5px;
+    }
+
+    &[tooltip-direction*="-right"]:after {
+        right: 0;
+    }
+
+    &[tooltip-direction*="-right"]:before {
+        right: 5px;
+    }
+
+    &[tooltip-direction*="-left"]:hover:after,
+    &[tooltip-direction*="-left"][tooltip-visible]:after,
+    &[tooltip-direction*="-right"]:hover:after,
+    &[tooltip-direction*="-right"][tooltip-visible]:after {
+        transform: translate(0, 0);
+    }
+
+    &[tooltip-direction*="-left"]:hover:before,
+    &[tooltip-direction*="-left"][tooltip-visible]:before,
+    &[tooltip-direction*="-right"]:hover:before,
+    &[tooltip-direction*="-right"][tooltip-visible]:before {
+        transform: translate(0, 0);
+    }
+
+    &[tooltip-direction^="up"]:before,
+    &[tooltip-direction^="up"]:after {
+        bottom: 100%;
+        transform-origin: top;
+        transform: translate(0, var(--tooltip-move));
+    }
+
+    &[tooltip-direction^="up"]:after {
+        margin-bottom: 10px;
+    }
+
+    &[tooltip-direction="up"]:before,
+    &[tooltip-direction="up"]:after {
+        left: 50%;
+        transform: translate(-50%, var(--tooltip-move));
+    }
+
+    &[tooltip-direction^="down"]:before,
+    &[tooltip-direction^="down"]:after {
+        top: 100%;
+        transform: translate(0, calc(var(--tooltip-move) * -1));
+    }
+
+    &[tooltip-direction^="down"]:after {
+        margin-top: 10px;
+    }
+
+    &[tooltip-direction^="down"]:before {
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-bottom-color: var(--tooltip-background);
+    }
+
+    &[tooltip-direction="down"]:after,
+    &[tooltip-direction="down"]:before {
+        left: 50%;
+        transform: translate(-50%, calc(var(--tooltip-move) * -1));
+    }
+
+    &[tooltip-direction="left"]:hover:after,
+    &[tooltip-direction="left"][tooltip-visible]:after,
+    &[tooltip-direction="right"]:hover:after,
+    &[tooltip-direction="right"][tooltip-visible]:after {
+        transform: translate(0, -50%);
+    }
+
+    &[tooltip-direction="left"]:hover:before,
+    &[tooltip-direction="left"][tooltip-visible]:before,
+    &[tooltip-direction="right"]:hover:before,
+    &[tooltip-direction="right"][tooltip-visible]:before {
+        transform: translate(0, -50%);
+    }
+
+    &[tooltip-direction="left"]:after,
+    &[tooltip-direction="left"]:before {
+        right: 100%;
+        top: 50%;
+        transform: translate(var(--tooltip-move), -50%);
+    }
+
+    &[tooltip-direction="left"]:after {
+        margin-right: 10px;
+    }
+
+    &[tooltip-direction="left"]:before {
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-left-color: var(--tooltip-background);
+    }
+
+    &[tooltip-direction="right"]:after,
+    &[tooltip-direction="right"]:before {
+        left: 100%;
+        top: 50%;
+        transform: translate(calc(var(--tooltip-move) * -1), -50%);
+    }
+
+    &[tooltip-direction="right"]:after {
+        margin-left: 10px;
+    }
+
+    &[tooltip-direction="right"]:before {
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-right-color: var(--tooltip-background);
+    }
+
+    &[tooltip-length]:after {
+        white-space: normal;
+    }
+
+    &[tooltip-length="small"]:after {
+        width: 80px;
+    }
+
+    &[tooltip-length="medium"]:after {
+        width: 150px;
+    }
+
+    &[tooltip-length="large"]:after {
+        width: 260px;
+    }
+
+    &[tooltip-length="xlarge"]:after {
+        width: 380px;
+    }
+
+    @media screen and (max-width: 768px) {
+        &[tooltip-length="xlarge"]:after {
+            width: 90vw;
+        }
+    }
+
+    &[tooltip-length="fit"]:after {
+        width: 100%;
+    }
+}
