@@ -6,19 +6,23 @@
 @import "../../assets/fontawesome/less/brands.less";
 @import "../../assets/Roboto/roboto.css";
 
+@import "./theme.less";
 @import "./switch.less";
 @import "./tooltip.less";
 @import "./layout.less";
 
-html, body{
+html {
+    height:100%;
     padding:0px;
     margin:0px;
+    box-sizing: border-box;
 }
 body {
-    width:100%;
-    height:100%;
+    padding:0px;
+    margin:0px;
     display:flex;
     font-family: "Roboto";
+    background:var(--i-window-background);
 }
 .hide{
     display:none !important;

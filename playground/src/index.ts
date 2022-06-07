@@ -4,7 +4,6 @@ import { Infinite } from "../../dist/esm/index";
 
 document.body.style.display = "flex";
 document.body.style.flexDirection = "column";
-document.body.style.background = "#f6f6f6";
 
 /** 
  * 
